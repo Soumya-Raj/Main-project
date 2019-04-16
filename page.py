@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug import secure_filename
+from authenticate import hello
 
 app = Flask(__name__)
 
@@ -36,6 +37,9 @@ def upload():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+@app.route('/login',methods=['POST','GET'])
+def login():
+    return hello()
 
 if __name__ == '__main__':
     app.run(debug = True)

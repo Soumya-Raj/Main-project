@@ -1,0 +1,273 @@
+/* Start About Myself css
+=========================================================================================== */
+
+.about_myself {
+    .section-title-wrap {
+        margin-bottom: 40px;
+    }
+    .about_box {
+        background: $lightGray;
+        padding: 80px 120px 21px;
+    }
+    .activity {
+        .activity_box {
+            background: $white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid $gray;
+            border-radius: 5px;
+            @include transition();
+            i {
+                font-size: 24px;
+                color: $baseColor;
+            }
+            h3 {
+                margin-top: 10px;
+            }
+            p {
+                margin-bottom: 0;
+            }
+            &:hover {
+                box-shadow: 0 8px 21px $gray;
+                border: 1px solid transparent;
+            }
+        }
+    }
+}
+
+/* About Us css End
+=========================================================================================== */
+
+/*Start Feedback Area
+=========================================================================================== */
+.feedback_area {
+    background: $lightGray;
+    .active-review-carusel {
+        position: relative;
+        .single-feedback-carusel {
+            margin-top: 70px;
+        }
+        .owl-dots {
+            position: absolute;
+            right: 38%;
+            bottom: 22%;
+            @include transform(translate(-38%, -22%));
+        }
+        .star {
+            margin-left: 20px;
+            .checked {
+                color: orange;
+            }
+        }
+    }
+}
+/* End Feedback Area
+=========================================================================================== */
+
+/* Start Our Service Area
+=========================================================================================== */
+.single_service{
+    text-align: center;
+    .lnr{
+        font-size: 35px;
+        color: $baseColor;
+    }
+    h4{
+        @include transition();
+        margin:20px 0px;
+    }
+    p {
+        margin: 0;
+    }
+    &:hover{
+        cursor:pointer;
+        h4{
+            color: $baseColor;
+        }
+    }
+    @media(max-width:991px){
+        margin-bottom:30px;
+    }
+}
+/* End Our Service Area
+=========================================================================================== */
+
+
+/*Start Appointment Area
+=========================================================================================== */
+.appointment-area{
+    background: $lightGray;
+    position: relative;
+    z-index: 5;
+    .appointment-wrap{
+        border-bottom:1px solid #eee;
+    }
+    .appointment-left{
+        h1{
+            margin-bottom:20px;
+            @media(max-width:991px){
+                font-size:30px;
+            }
+        } 
+        p{
+           max-width:450px;
+        }   
+        @media(max-width:991px){
+            padding-top:120px;
+            margin-bottom:40px;
+        }   
+        .time-list{
+            margin-top:50px;
+            padding-left: 0;
+            li{
+                border-bottom:1px solid #eee;
+                font-size:14px;
+                font-weight:400;
+                color:$black;
+                margin-bottom:20px;
+                padding-bottom:20px;
+            }
+        }
+    }
+    .appointment-right{
+        @media(max-width:767px){
+            margin-top:30px;
+        }
+        margin:-20px 0;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 10px 20px 0px rgba(153, 153, 153, 0.1);
+        .form-wrap{
+            padding: 30px 40px 50px;
+            @media(max-width:413px){
+                padding:0px;
+            }
+            .confirm_btn_box {
+                @media (max-width: 420px) {
+                    padding-bottom: 50px;
+                }
+            }
+            .main_btn {
+                border-radius: 0;
+            }
+            .form-control{
+                margin-bottom:10px;
+                border-radius:0px;
+                padding: 0.675rem 0.75rem;                
+                font-size:13px;
+                font-weight:300;
+                &:focus{
+                    box-shadow:none;
+                }
+            }
+            .current{
+                margin-left:-32px;
+                font-size:13px;
+            }
+            .form-select .nice-select{
+                border: 1px solid #ced4da;
+                margin-bottom: 10px;
+                background: $white!important;             
+            }
+            .form-select .nice-select .list {
+                border: 1px solid $baseColor;
+                .option{
+                    padding-left:15px;
+                    &:hover {
+                        color: $baseColor;
+                    }
+                    &.selected {
+                        color: $baseColor;
+                    }
+                }
+            }            
+            .primary-btn{
+                width:100%;
+                margin-top:5px;
+            }
+            textarea{
+                width:100%;
+                border:1px solid #ced4da;
+                margin-bottom:20px;
+                padding: 0.675rem 0.75rem;                
+                font-size:13px;
+                font-weight:300;
+                &:focus {
+                    border: 1px solid $baseColor;
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
+/*End Appointment Area
+=========================================================================================== */
+
+
+/*Start Recent Blog Area
+=========================================================================================== */
+.single-recent-blog{
+    .thumb{
+        overflow: hidden;
+        img{
+            width:100%;
+        }
+    }
+    
+    h4{
+        font-weight:600;
+        margin-top:35px;
+        @include transition();
+    }
+    a{
+        color:#222;
+    }
+    .name{
+        font-size:13px;
+        font-weight:100;
+    }
+    p{
+        text-align:left;
+        margin:20px 0px;
+        max-width: 310px;
+    }
+    .bottom{
+        padding:10px 0;
+        span{
+            margin-left:20px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    @media(max-width:991px) {
+        margin-bottom:30px;
+        .meta{
+            margin-top:20px;
+        }
+    }
+    @media(max-width:767px){
+        .meta{
+            margin-top:0px;
+        }
+        
+    }   
+
+    .f-img{
+        @include transition();
+    }
+    &:hover{
+        cursor:pointer;
+        h4{
+            color:$baseColor;
+        }
+        .f-img{
+            cursor:pointer;
+            transform: scale(1.05);             
+        }
+    }
+
+}
+/* end Recent Blog Area
+=========================================================================================== */

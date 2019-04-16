@@ -1,0 +1,67 @@
+/*font Variables*/
+
+$rob: 'Roboto', sans-serif;
+/*Color Variables*/
+
+$baseColor: #3face4;
+$dip: #000000;
+$pfont: #777777;
+$lightGray: #f9f9ff;
+$gray: #dddddd;
+$white: #ffffff;
+$black: #222222;
+/*=================== fonts ====================*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+// Mixins
+@mixin transition($property: all,
+$duration: 300ms,
+$animate: linear,
+$delay:0s) {
+    transition: $property $duration $animate $delay;
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -o-transform: $transform;
+    -ms-transform: $transform;
+    transform: $transform;
+}
+
+@mixin filter($filter) {
+    -webkit-filter: $filter;
+    -moz-filter: $filter;
+    -o-filter: $filter;
+    -ms-filter: $filter;
+    filter: $filter;
+}
+
+// Placeholder Mixins
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+.col {
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    @media(max-width: 480px) {
+        -ms-flex: 0 0 100% !important;
+        flex: 0 0 100% !important;
+    }
+    @media(max-width: 991px) {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+    }
+}

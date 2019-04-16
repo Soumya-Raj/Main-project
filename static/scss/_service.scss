@@ -1,0 +1,15 @@
+/* Procedure Category
+============================================================================================ */
+.procedure_category {
+    .categories_post {
+        .categories_details {
+            opacity: 0;
+        }
+        &:hover {
+            .categories_details {
+                opacity: 1;
+                background: rgba(34, 34, 34, 0.50);
+            }
+        }
+    }
+}

@@ -116,9 +116,8 @@ font-weight: bold;
 										<a class="nav-link" href="#">Home</a>
 									</li>
                   <li class="nav-item">
-                    <form action="login" method="post">
-										<button class="btn-link nav-link" >Login</button>
-                    </form>
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+
 									</li>
 									<li class="nav-item ">
 										<a class="nav-link" href="#">About</a>

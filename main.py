@@ -1,5 +1,5 @@
 import os
-from flask import render_template, request, redirect, url_for, send_from_directory,Blueprint,flash,send_file
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory,Blueprint,flash,send_file
 from werkzeug import secure_filename
 #from . import db
 from flask_sqlalchemy import SQLAlchemy
@@ -18,32 +18,32 @@ def index():
 @main.route('/startanalysis')
 @login_required
 def startanalysis():
-    return render_template('upload.html')
+    return redirect(url_for('main.uploadit'))
 
-@main.route('/uploadit', methods=['POST'])
+
+@main.route('/uploadit', methods=['POST','GET'])
 # @login_required
 def uploadit():
-
-    # Get the name of the uploaded files
     if request.method == 'POST':
-        uploaded_files = request.files['file']
+        # check if the post request has the file part
+        # if 'file' not in request.files.getlist("file[]"):
+        #     flash('No file part')
+        #     return redirect(request.url)
+        uploaded_files = request.files.getlist("file[]")
         filenames = []
-        ALLOWED_EXTENSIONS=['raw', 'mhd']
-
-
-
-
         for file in uploaded_files:
-
-            # Check if the file is one of the allowed types/extensions
-            # and file.filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-            if file :
+        # if user does not select file, browser also
+        # submit an empty part without filename
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file:
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
                 filenames.append(filename)
-                return render_template('main.html')
-
-    return render_template('admin_login.html')
+        return redirect(url_for('main.uploadit',
+                                filename=filename))
+    return render_template('upload.html')
 
 @main.route('/uploads/<filename>')
 def uploaded_file(filename):

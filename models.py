@@ -35,3 +35,16 @@ class MyModelView(ModelView):
 
     def inaccessible_callback(self,name,**kwargs):
         return redirect(url_for('auth.adminlogin'))
+
+class Image(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    img_filename = db.Column(db.String())
+    img_data = db.Column(db.LargeBinary)
+def add_image(image_dict):
+    new_image = Image(name=image_dict['name'], \
+                        img_filename=image_dict['img_filename'], \
+                        img_data=image_dict['img_data'])
+    db.session.add(new_image)
+    db.session.commit()

@@ -5,7 +5,8 @@ from werkzeug import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
-
+from . import db
+from .models import Image,add_image
 
 main = Blueprint('main',__name__)
 global UPLOAD_FOLDER
@@ -23,6 +24,7 @@ def startanalysis():
 
 @main.route('/uploadit', methods=['POST','GET'])
 # @login_required
+
 def uploadit():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -39,7 +41,13 @@ def uploadit():
                 return redirect(request.url)
             if file:
                 filename = secure_filename(file.filename)
-                file.save(os.path.join(UPLOAD_FOLDER, filename))
+                add_image({
+                            'name': current_user.name,
+                            'img_filename' : filename ,
+                            'img_data' : file.read(),
+                            })
+
+                # file.save(os.path.join(UPLOAD_FOLDER, filename))
                 filenames.append(filename)
         return redirect(url_for('main.uploadit',
                                 filename=filename))

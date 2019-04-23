@@ -19,6 +19,7 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="static/css/style.css">
 	<link rel="stylesheet" href="static/css/responsive.css">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/app.css') }}"> -->
 
 
   <style>
@@ -112,10 +113,10 @@ font-weight: bold;
 							<div class="col-lg-12 pr-0">
 
                 {% if current_user.is_authenticated %}
-                {% with name = get_flashed_messages() %}
+                {% with name = get_flashed_messages(with_categories=false) %}
                 {% if name %}
 
-                <h2> Welcome, {{name}} </h2>
+                <h2> Welcome, {{name[0]}} </h2>
 
                   {% endif %}
                   {% endwith %}
@@ -140,7 +141,7 @@ font-weight: bold;
 
                   {% endif %}
 									<li class="nav-item ">
-										<a class="nav-link" href="#">About</a>
+										<a class="nav-link" href="https://assistant-chat-eu-gb.watsonplatform.net/web/public/5d075d42-23dc-48fe-bc33-ada79ee17ce8">Chatbot</a>
 									</li>
 									<li class="nav-item ">
 										<a class="nav-link" href="#contact">Contact</a>
@@ -169,28 +170,47 @@ font-weight: bold;
 			</div>
 		</div>
 
-    <!-- <div class="frame" id="myDiv" style="display: none;">
-      <div class="center">
-        <div class="bar"></div>
-        <div class="title">Drop file or click to upload</div>
-        <div id="MyDiv" class="dropzone" draggable="true">
-          <div class="content">
-                <img src="http://100dayscss.com/codepen/upload.svg" class="upload">
-                <span class="filename"></span>
-                <formid="btn" method="post" enctype="multipart/form-data">
-                <input type="file" multiple="" name="file[]" class="span3" /><br /> -->
-                <!-- <input type="submit" value="Upload" class="upload-btn" class="span2" >
-                <img src="http://100dayscss.com/codepen/syncing.svg" class="syncing">
-                <img src="http://100dayscss.com/codepen/checkmark.svg" class="done">
-          </div>
-         </div>
-      </div>
-    </form>
-    </div> -->
 
 
 
 	</section>
+
+  <div class="chatbubble">
+         <div class="unexpanded">
+             <div class="title">Chat with Support</div>
+         </div>
+         <div class="expanded chat-window">
+             <div class="login-screen container">
+             <form id="loginScreenForm">
+                 <div class="form-group">
+                 <input type="text" class="form-control" id="fullname" placeholder="Name_" required>
+                 </div>
+                 <div class="form-group">
+                 <input type="email" class="form-control" id="email" placeholder="Email Address_" required>
+                 </div>
+                 <button type="submit" class="btn btn-block btn-primary">Start Chat</button>
+             </form>
+             </div>
+             <div class="chats">
+             <div class="loader-wrapper">
+                 <div class="loader">
+                 <span>{</span><span>}</span>
+                 </div>
+             </div>
+             <ul class="messages clearfix">
+             </ul>
+             <div class="input">
+                 <form class="form-inline" id="messageSupport">
+                 <div class="form-group">
+                     <input type="text" autocomplete="off" class="form-control" id="newMessage" placeholder="Enter Message">
+                 </div>
+                 <button type="submit" class="btn btn-primary">Send</button>
+                 </form>
+             </div>
+             </div>
+         </div>
+     </div>
+
 	<!--================ End Home Banner Area =================-->
 
   <!--================ Start Offered Services Area =================-->
@@ -271,7 +291,11 @@ font-weight: bold;
 						<div class="section-title-wrap text-left">
 							<h1>About LungCare</h1>
 							<p>
-								LungCare makes it possible to detect lung cancer at an early stage when it’s most treatable and has less expensive treatment options. As a result, the early detection of lung cancer allows you to save on medical costs occurring from future treatment.
+								LungCare makes it possible to detect lung cancer at an
+                early stage when it’s most treatable and has less expensive
+                treatment options. As a result, the early detection of lung
+                cancer allows you to save on medical costs occurring from
+                future treatment.
 							</p>
 						</div>
 
@@ -282,7 +306,17 @@ font-weight: bold;
 										<div>
 											<i class="lnr lnr-database"></i>
 										</div>
-										<h3><span class="counter">234</span> </h3>
+	                 {% with count = get_flashed_messages(category_filter=["upload_count"]) %}
+                          {% if count %}
+      										<h3 class="counter">
+
+
+                          {{count[0]}}
+
+
+                          </h3>
+                          {% endif %}
+                          {% endwith %}
 										<p>Total Checks</p>
 									</div>
 								</div>
@@ -292,7 +326,17 @@ font-weight: bold;
 										<div>
 											<i class="lnr lnr-book"></i>
 										</div>
-										<h3 class="counter">654</h3>
+                    {% with count = get_flashed_messages(category_filter=["upload_count"]) %}
+                    {% if count %}
+										<h3 class="counter">
+
+
+                    {{count[0]}}
+
+
+                    </h3>
+                    {% endif %}
+                    {% endwith %}
 										<p>Total Uploads</p>
 									</div>
 								</div>
@@ -301,7 +345,17 @@ font-weight: bold;
 										<div>
 											<i class="lnr lnr-users"></i>
 										</div>
-										<h3 class="counter">396</h3>
+                    {% with account_count = get_flashed_messages(category_filter=["account_count"]) %}
+                    {% if account_count %}
+                    <h3 class="counter">
+
+
+                    {{account_count[0]}}
+
+
+                    </h3>
+                    {% endif %}
+                    {% endwith %}
 										<p>Total Accounts</p>
 									</div>
 								</div>
@@ -322,6 +376,13 @@ font-weight: bold;
 		</div>
 	</section>
 	<!--================ End About Myself Area =================-->
+<!-- chatbot area -->
+
+
+
+
+
+
 
 
 	<!--================ Start Feedback Area =================-->
@@ -356,8 +417,7 @@ font-weight: bold;
 									</div>
 								</div>
 								<p class="">
-									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can
-									find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
+                 Easy to Use
 								</p>
 							</div>
 						</div>
@@ -371,7 +431,7 @@ font-weight: bold;
 						<div class="col-lg-6">
 							<div class="single-feedback-carusel">
 								<div class="d-flex flex-row">
-									<h4 class="">Fannie Rowe</h4>
+									<h4 class="">RAKSHITH</h4>
 									<div class="star">
 										<span class="fa fa-star checked"></span>
 										<span class="fa fa-star checked"></span>
@@ -381,8 +441,7 @@ font-weight: bold;
 									</div>
 								</div>
 								<p class="">
-									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can
-									find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
+                  Good accuracy
 								</p>
 							</div>
 						</div>
@@ -459,7 +518,7 @@ font-weight: bold;
 				</div>
 				<div class="col-lg-6 col-md-6 pt-60 pb-60">
 					<div class="appointment-right" id="contact">
-						<form class="form-wrap" action="#">
+						<form class="form-wrap" method="post" action="{{ url_for('main.process_email') }}">
 							<h3 class="pb-20 text-center mb-20">Contact</h3>
 							<input type="text" class="form-control" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Patient Name'">
 							<input type="email" class="form-control" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
@@ -475,79 +534,6 @@ font-weight: bold;
 	</section>
 	<!--================ End Appointment Area =================-->
 
-	<!--================ Start recent-blog Area =================-->
-	<section class="recent-blog-area section_gap">
-		<div class="container">
-			<div class="row justify-content-center section-title-wrap">
-				<div class="col-lg-12">
-					<h1>Read Doctor's Blogs</h1>
-					<p>
-						Get to hear about everything and anything you want to know about your condition from a trusted doctor.
-					</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="single-recent-blog col-lg-4 col-md-4">
-					<div class="thumb">
-						<img class="f-img img-fluid mx-auto" src="static/img/b1.jpg" alt="">
-					</div>
-					<a href="#">
-						<h4>Lung cancer early detection</h4>
-					</a>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud.
-					</p>
-					<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
-						<div class="meta">
-							<span class="lnr lnr-calendar-full"></span> 13th Dec
-							<span class="lnr lnr-heart"></span> 15
-							<span class="lnr lnr-bubble"></span> 04
-						</div>
-					</div>
-				</div>
-				<div class="single-recent-blog col-lg-4 col-md-4">
-					<div class="thumb">
-						<img class="f-img img-fluid mx-auto" src="static/img/b2.jpg" alt="">
-					</div>
-					<a href="#">
-						<h4>Know your disease</h4>
-					</a>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud.
-					</p>
-					<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
-						<div class="meta">
-							<span class="lnr lnr-calendar-full"></span> 13th Dec
-							<span class="lnr lnr-heart"></span> 15
-							<span class="lnr lnr-bubble"></span> 04
-						</div>
-					</div>
-				</div>
-				<div class="single-recent-blog col-lg-4 col-md-4">
-					<div class="thumb">
-						<img class="f-img img-fluid mx-auto" src="static/img/b3.jpg" alt="">
-					</div>
-					<a href="#">
-						<h4>Precautions; are there?</h4>
-					</a>
-					<p>
-						Lung cancer is the second most common cancer in both men and women (not counting skin cancer), and is by far the leading cause of cancer death among both men and women.
-					</p>
-					<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
-						<div class="meta">
-							<span class="lnr lnr-calendar-full"></span> 13th Dec
-							<span class="lnr lnr-heart"></span> 15
-							<span class="lnr lnr-bubble"></span> 04
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================ end recent-blog Area =================-->
-
 	<!--================ start footer Area =================-->
 	<footer class="footer-area section_gap">
 		<div class="container">
@@ -561,10 +547,13 @@ font-weight: bold;
 					<div class="single-footer-widget mail-chimp">
 						<h6 class="mb-20">Contact Us</h6>
 						<p>
-							56/8, Santa bullevard, Rocky beach, San fransisco, Los angeles, USA
+							Deptartment of Computer Science</br>
+              Government Engineering College, Sreekrishnapuram </br>
+              Palakkad
+
 						</p>
-						<h3>012-6532-568-9746</h3>
-						<h3>012-6532-568-97468</h3>
+						<h3>+91-7356162825</h3>
+						<h3>+91-6282865639</h3>
 					</div>
 				</div>
 				<div class="col-lg-6  col-md-12">
@@ -596,10 +585,10 @@ font-weight: bold;
 	<script src="static/vendors/isotope/isotope-min.js"></script>
 	<script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script src="static/js/jquery.ajaxchimp.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 	<script src="static/js/mail-script.js"></script>
 	<script src="static/js/custom.js"></script>
+      <!-- <script src="static/js/chatbot/app.js"></script> -->
 </body>
 
 </html>

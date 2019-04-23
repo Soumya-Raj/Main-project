@@ -5,17 +5,80 @@ from werkzeug import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
-from . import db
+from flask_mail import Mail,Message
+
+from . import db,mail
 from .models import Image,add_image
 
 main = Blueprint('main',__name__)
 global UPLOAD_FOLDER
-UPLOAD_FOLDER= '/home/rakshith/Desktop/'
+
+
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'lungvison'
+MAIL_PASSWORD = 'qweasdzxc@123'
+
+ADMINS = ['lungvison@gmail.com']
+
+
 
 
 @main.route('/')
 def index():
+#-------------CODE FOR THE COUNTERS IN HOME PAGE----------
+    sql_image='select count(img_filename) from Image'
+    count_file = db.session.execute(sql_image)
+
+    d, a = {}, []
+    for rowproxy in count_file:
+
+        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
+        for column, value in rowproxy.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+            a.append(d[column])
+
+    if(a):
+        flash(a[0],'upload_count')
+    else:
+        flash('ooombi')
+
+    sql_users='select count(email) from User'
+    count_file = db.session.execute(sql_users)
+
+    for rowproxy in count_file:
+
+        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
+        for column, value in rowproxy.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+            a.append(d[column])
+
+    if(a):
+        flash(a[1],'account_count')
+    else:
+        flash('ooombi')
+
+
+
+
     return render_template('main.html')
+
+@main.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
+
+@main.route('/process_email', methods=['POST'])
+def process_email():
+    msg = Message('Test', sender='lungvison@gmail.com', recipients='lungvison@gmail.com')
+    msg.body = 'This is a test email' #Customize based on user input
+    mail.send(msg)
+
+    return render_template('main.html')
+
 @main.route('/startanalysis')
 @login_required
 def startanalysis():

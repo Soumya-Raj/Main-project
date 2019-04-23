@@ -394,6 +394,18 @@ font-weight: bold;
 					<p>
 						You are joining more than 500 people that use LungCare to keep their lung healthy.
 					</p>
+
+          {% with feed = get_flashed_messages(category_filter=["feedback"]) %}
+          {% if feed %}
+          <h3 >
+
+
+          {{feed}}
+
+
+          </h3>
+          {% endif %}
+          {% endwith %}
 				</div>
 			</div>
 
@@ -522,7 +534,7 @@ font-weight: bold;
 							<h3 class="pb-20 text-center mb-20">Contact</h3>
 							<input type="text" class="form-control" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Patient Name'">
 							<input type="email" class="form-control" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-							<textarea name="messege" class="" rows="5" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"></textarea>
+							<textarea name="message" class="" rows="5" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"></textarea>
 							<div class="text-center confirm_btn_box">
 								<button class="main_btn text-uppercase">Send</button>
 							</div>

@@ -18,6 +18,14 @@ class Admindb(UserMixin,db.Model):
     name = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
 
+
+class Feedback(UserMixin,db.Model):
+    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100), unique=True)
+    message = db.Column(db.String(1000))
+
+
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
 

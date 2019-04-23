@@ -49,11 +49,12 @@ def create_app():
 
 
 
-    from .models import User,MyModelView,Admindb,MyAdminIndexView,Image
+    from .models import User,MyModelView,Admindb,MyAdminIndexView,Image,Feedback
     admin=Admin(app,index_view=MyAdminIndexView())
     admin.add_view(MyModelView(User,db.session))
     admin.add_view(MyModelView(Admindb,db.session))
     admin.add_view(MyModelView(Image,db.session))
+    admin.add_view(MyModelView(Feedback,db.session))
 
 
     @login_manager.user_loader

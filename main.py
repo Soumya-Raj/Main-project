@@ -8,7 +8,7 @@ from flask_login import LoginManager,login_required, current_user
 from flask_mail import Mail,Message
 
 from . import db,mail
-from .models import Image,add_image
+from .models import Image,add_image,Feedback
 
 main = Blueprint('main',__name__)
 global UPLOAD_FOLDER
@@ -73,11 +73,24 @@ def chatbot():
 
 @main.route('/process_email', methods=['POST'])
 def process_email():
-    msg = Message('Test', sender='lungvison@gmail.com', recipients='lungvison@gmail.com')
-    msg.body = 'This is a test email' #Customize based on user input
-    mail.send(msg)
 
-    return render_template('main.html')
+    email = request.form.get('email')
+    name = request.form.get('name')
+    message = request.form.get('message')
+
+    user = Feedback.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+
+    if user:
+        flash('To preserve the genuinity of feedbacks,a user can send only 1 feedback','feedback') # if a user is found, we want to redirect back to signup page so user can try again
+        return redirect(url_for('main.index'))
+
+    feed=Feedback(email=email,name=name,message=message)
+
+    db.session.add(feed)
+    db.session.commit()
+
+
+    return redirect(url_for('main.index'))
 
 @main.route('/startanalysis')
 @login_required

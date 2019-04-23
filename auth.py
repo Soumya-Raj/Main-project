@@ -54,7 +54,7 @@ def login_post():
     # if the above check passes, then we know the user has the right credentials
     login_user(user)
     name=current_user.name
-    flash(name)
+    flash(name,'username_0')
     return redirect(url_for('main.index'))
 
 @auth.route('/signup')

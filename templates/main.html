@@ -79,7 +79,7 @@ font-weight: bold;
             <li>
 							<a href="login.html">
 								<i class="lnr lnr-phone-handset"></i>
-								012-6532-568-9746
+							+91-7356162825
 							</a>
 						</li>
 					</ul>
@@ -113,7 +113,7 @@ font-weight: bold;
 							<div class="col-lg-12 pr-0">
 
                 {% if current_user.is_authenticated %}
-                {% with name = get_flashed_messages(with_categories=false) %}
+                {% with name = get_flashed_messages(category_filter=["username_0"]) %}
                 {% if name %}
 
                 <h2> Welcome, {{name[0]}} </h2>
@@ -144,7 +144,7 @@ font-weight: bold;
 										<a class="nav-link" href="https://assistant-chat-eu-gb.watsonplatform.net/web/public/5d075d42-23dc-48fe-bc33-ada79ee17ce8">Chatbot</a>
 									</li>
 									<li class="nav-item ">
-										<a class="nav-link" href="#contact">Contact</a>
+										<a class="nav-link" href="/home/rakshith/webinterface/templates/contact.html">Contact</a>
 									</li>
 
 							</div>
@@ -175,7 +175,7 @@ font-weight: bold;
 
 	</section>
 
-  <div class="chatbubble">
+  <!-- <div class="chatbubble">
          <div class="unexpanded">
              <div class="title">Chat with Support</div>
          </div>
@@ -209,7 +209,7 @@ font-weight: bold;
              </div>
              </div>
          </div>
-     </div>
+     </div> -->
 
 	<!--================ End Home Banner Area =================-->
 
@@ -419,7 +419,19 @@ font-weight: bold;
 						<div class="col-lg-6">
 							<div class="single-feedback-carusel">
 								<div class="d-flex flex-row">
-									<h4 class="">Fannie Rowe</h4>
+                  {% with nam0 = get_flashed_messages(category_filter=["name0"]) %}
+                  {% if nam0 %}
+
+
+
+
+                  <h4 class="">{{nam0[0]}}</h4>
+
+
+
+                  {% endif %}
+                  {% endwith %}
+
 									<div class="star">
 										<span class="fa fa-star checked"></span>
 										<span class="fa fa-star checked"></span>
@@ -428,9 +440,19 @@ font-weight: bold;
 										<span class="fa fa-star"></span>
 									</div>
 								</div>
-								<p class="">
-                 Easy to Use
-								</p>
+
+                  {% with msg0 = get_flashed_messages(category_filter=["message0"]) %}
+                  {% if msg0 %}
+                  <p class="">
+
+
+                  {{msg0[0]}}
+
+
+                  </p>
+                  {% endif %}
+                  {% endwith %}
+
 							</div>
 						</div>
 					</div>
@@ -443,7 +465,18 @@ font-weight: bold;
 						<div class="col-lg-6">
 							<div class="single-feedback-carusel">
 								<div class="d-flex flex-row">
-									<h4 class="">RAKSHITH</h4>
+                  {% with nam1 = get_flashed_messages(category_filter=["name1"]) %}
+                  {% if nam1 %}
+
+
+
+
+                  <h4 class="">{{nam1[0]}}</h4>
+
+
+
+                  {% endif %}
+                  {% endwith %}
 									<div class="star">
 										<span class="fa fa-star checked"></span>
 										<span class="fa fa-star checked"></span>
@@ -452,9 +485,17 @@ font-weight: bold;
 										<span class="fa fa-star"></span>
 									</div>
 								</div>
-								<p class="">
-                  Good accuracy
-								</p>
+                {% with msg1 = get_flashed_messages(category_filter=["message1"]) %}
+                {% if msg1 %}
+                <p class="">
+
+
+                {{msg1[0]}}
+
+
+                </p>
+                {% endif %}
+                {% endwith %}
 							</div>
 						</div>
 					</div>
@@ -467,7 +508,18 @@ font-weight: bold;
 						<div class="col-lg-6">
 							<div class="single-feedback-carusel">
 								<div class="d-flex flex-row">
-									<h4 class="">Fannie Rowe</h4>
+                  {% with nam2 = get_flashed_messages(category_filter=["name2"]) %}
+                  {% if nam2 %}
+
+
+
+
+                  <h4 class="">{{nam2[0]}}</h4>
+
+
+
+                  {% endif %}
+                  {% endwith %}
 									<div class="star">
 										<span class="fa fa-star checked"></span>
 										<span class="fa fa-star checked"></span>
@@ -476,10 +528,17 @@ font-weight: bold;
 										<span class="fa fa-star"></span>
 									</div>
 								</div>
-								<p class="">
-									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can
-									find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
-								</p>
+                {% with msg2 = get_flashed_messages(category_filter=["message2"]) %}
+                {% if msg2 %}
+                <p class="">
+
+
+                {{msg2[0]}}
+
+
+                </p>
+                {% endif %}
+                {% endwith %}
 							</div>
 						</div>
 					</div>
@@ -492,7 +551,18 @@ font-weight: bold;
 						<div class="col-lg-6">
 							<div class="single-feedback-carusel">
 								<div class="d-flex flex-row">
-									<h4 class="">Fannie Rowe</h4>
+                  {% with nam3 = get_flashed_messages(category_filter=["name3"]) %}
+                  {% if nam3 %}
+
+
+
+
+                  <h4 class="">{{nam3[0]}}</h4>
+
+
+
+                  {% endif %}
+                  {% endwith %}
 									<div class="star">
 										<span class="fa fa-star checked"></span>
 										<span class="fa fa-star checked"></span>
@@ -501,10 +571,17 @@ font-weight: bold;
 										<span class="fa fa-star"></span>
 									</div>
 								</div>
-								<p class="">
-									Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can
-									find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
-								</p>
+                {% with msg3 = get_flashed_messages(category_filter=["message3"]) %}
+                {% if msg3 %}
+                <p class="">
+
+
+                {{msg3[0]}}
+
+
+                </p>
+                {% endif %}
+                {% endwith %}
 							</div>
 						</div>
 					</div>
@@ -522,7 +599,7 @@ font-weight: bold;
 			<div class="row justify-content-between align-items-center appointment-wrap">
 				<div class="col-lg-5 col-md-6 appointment-left">
 					<h1>
-						Ask us anything
+						Your reviews and feedbacks make us better.
 					</h1>
 					<p>
 						Any additional queries in your mind, send across your feedbacks.
@@ -531,7 +608,7 @@ font-weight: bold;
 				<div class="col-lg-6 col-md-6 pt-60 pb-60">
 					<div class="appointment-right" id="contact">
 						<form class="form-wrap" method="post" action="{{ url_for('main.process_email') }}">
-							<h3 class="pb-20 text-center mb-20">Contact</h3>
+							<h3 class="pb-20 text-center mb-20">Feedback</h3>
 							<input type="text" class="form-control" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Patient Name'">
 							<input type="email" class="form-control" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
 							<textarea name="message" class="" rows="5" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"></textarea>

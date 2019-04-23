@@ -32,7 +32,9 @@ def index():
     sql_image='select count(img_filename) from Image'
     count_file = db.session.execute(sql_image)
 
-    d, a = {}, []
+    d, a, mes, nam = {}, [], [], []
+
+    i=0
     for rowproxy in count_file:
 
         # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
@@ -61,6 +63,56 @@ def index():
         flash(a[1],'account_count')
     else:
         flash('ooombi')
+
+    sql_feedback='select message as m from Feedback'
+    count_file = db.session.execute(sql_feedback)
+
+
+    for rowproxy in count_file:
+
+        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
+        for column, value in rowproxy.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+            mes.append(d[column])
+
+
+
+        while(i<len(mes)):
+
+            category='message'+str(i)
+
+            flash(mes[i],category)
+            i+=1
+
+
+    sql_feedback_name='select name as n from Feedback'
+    count_file = db.session.execute(sql_feedback_name)
+
+
+    for rowproxy in count_file:
+
+        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
+        for column, value in rowproxy.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+            nam.append(d[column])
+
+
+
+
+
+        i=0
+        while(i<len(nam)):
+
+            category='name'+str(i)
+
+            flash(nam[i],category)
+            i+=1
+
+
+
+
 
 
 

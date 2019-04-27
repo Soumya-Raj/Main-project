@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory,Blueprint,flash,send_file
 from werkzeug import secure_filename
-#from . import db
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
@@ -11,8 +10,6 @@ from . import db,mail
 from .models import Image,add_image,Feedback
 
 main = Blueprint('main',__name__)
-global UPLOAD_FOLDER
-
 
 
 
@@ -88,10 +85,6 @@ def index():
             d = {**d, **{column: value}}
             nam.append(d[column])
 
-
-
-
-
         i=0
         while(i<len(nam)):
 
@@ -99,11 +92,6 @@ def index():
 
             flash(nam[i],category)
             i+=1
-
-
-
-
-
 
 
 
@@ -145,10 +133,7 @@ def startanalysis():
 
 def uploadit():
     if request.method == 'POST':
-        # check if the post request has the file part
-        # if 'file' not in request.files.getlist("file[]"):
-        #     flash('No file part')
-        #     return redirect(request.url)
+
         uploaded_files = request.files.getlist("file[]")
         filenames = []
         for file in uploaded_files:
@@ -176,10 +161,3 @@ def uploaded_file(filename):
 
     return send_from_directory(UPLOAD_FOLDER,
                                filename)
-# @main.route('/login',methods=['POST','GET'])
-# def login():
-#     return render_template('login.html')
-
-
-# if __name__ == '__main__':
-#     main.run(debug = True)

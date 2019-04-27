@@ -6,14 +6,12 @@ from flask_login import LoginManager
 from flask_admin import Admin,AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 
-from flask_mail import Mail,Message
-
 import os
 
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
-mail = Mail()
+
 
 
 
@@ -26,19 +24,9 @@ def create_app():
     app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
-    # These are the extension that we are accepting to be uploaded
-    app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'dcm', 'raw', 'mhd'])
 
-
-
-
-
-    # For a given file, return whether it's an allowed type or not
 
     db.init_app(app)
-    mail.init_app(app)
-
-
 
 
 
@@ -71,8 +59,3 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     return app
-
-
-# def allowed_file(filename):
-#     return '.' in filename and
-#            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']

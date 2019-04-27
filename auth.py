@@ -16,7 +16,6 @@ def adminlogin():
 def adminlogin_post():
     name = request.form.get('name')
     password = request.form.get('password')
-    #remember = True if request.form.get('remember') else False
 
     user = Admindb.query.filter_by(name=name).first()
 

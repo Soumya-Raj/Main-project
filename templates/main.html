@@ -19,56 +19,8 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="static/css/style.css">
 	<link rel="stylesheet" href="static/css/responsive.css">
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/app.css') }}"> -->
-
-
-  <style>
-  .btn {
-border: 2px solid gray;
-color: gray;
-background-color: white;
-padding: 8px 20px;
-border-radius: 8px;
-font-size: 20px;
-font-weight: bold;
-}
-.upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-  </style>
-
-
-
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="css/style1.css">-->
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
-  <link rel="stylesheet" href="static/css/style1.css">-->
-  <script>
-        function myFunction() {
-          var x = document.getElementById("myDiv");
-            if (x.style.display === "none") {
-            x.style.display = "block";
-          } else {
-            x.style.display = "none";
-          }
-        }
-
-
-
-
-  </script>
-  <!--<script src='https://100dayscss.com/codepen/js/jquery.min.js'></script>
-  <script  src="js/index1.js"></script>-->
-  <script  src="static/js/indexupload.js"></script>
-</head>
-
-<body>
-
-
+  <!-- <link rel="stylesheet" href="static/css/chatbot/app.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/app.css') }}">
 
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
@@ -174,42 +126,6 @@ font-weight: bold;
 
 
 	</section>
-
-  <!-- <div class="chatbubble">
-         <div class="unexpanded">
-             <div class="title">Chat with Support</div>
-         </div>
-         <div class="expanded chat-window">
-             <div class="login-screen container">
-             <form id="loginScreenForm">
-                 <div class="form-group">
-                 <input type="text" class="form-control" id="fullname" placeholder="Name_" required>
-                 </div>
-                 <div class="form-group">
-                 <input type="email" class="form-control" id="email" placeholder="Email Address_" required>
-                 </div>
-                 <button type="submit" class="btn btn-block btn-primary">Start Chat</button>
-             </form>
-             </div>
-             <div class="chats">
-             <div class="loader-wrapper">
-                 <div class="loader">
-                 <span>{</span><span>}</span>
-                 </div>
-             </div>
-             <ul class="messages clearfix">
-             </ul>
-             <div class="input">
-                 <form class="form-inline" id="messageSupport">
-                 <div class="form-group">
-                     <input type="text" autocomplete="off" class="form-control" id="newMessage" placeholder="Enter Message">
-                 </div>
-                 <button type="submit" class="btn btn-primary">Send</button>
-                 </form>
-             </div>
-             </div>
-         </div>
-     </div> -->
 
 	<!--================ End Home Banner Area =================-->
 
@@ -376,12 +292,30 @@ font-weight: bold;
 		</div>
 	</section>
 	<!--================ End About Myself Area =================-->
-<!-- chatbot area -->
 
 
+<!--================ Chatbot Area =================-->
+<div class="chat">
+<button class="open-button" onclick="openForm()">Chat!</button>
+<div class="chat-popup" id="myForm">
+
+  <button type="button" onclick="closeForm()" class="close" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+  <iframe
+      allow="microphone;"
+      width="350"
+      height="430"
+      src="https://console.dialogflow.com/api-client/demo/embedded/db4acb1f-49d7-4eef-aa3c-6105f0644ae4">
+  </iframe>
+</div>
+</div>
+ </form>
+</div>
+</div>
 
 
-
+<!--================ End of Chatbot Area =================-->
 
 
 
@@ -677,7 +611,7 @@ font-weight: bold;
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 	<script src="static/js/mail-script.js"></script>
 	<script src="static/js/custom.js"></script>
-      <!-- <script src="static/js/chatbot/app.js"></script> -->
+  <script src="static/js/chatbot/app.js"></script>
 </body>
 
 </html>

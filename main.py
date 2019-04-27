@@ -5,23 +5,13 @@ from werkzeug import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
-from flask_mail import Mail,Message
+
 
 from . import db,mail
 from .models import Image,add_image,Feedback
 
 main = Blueprint('main',__name__)
 global UPLOAD_FOLDER
-
-
-MAIL_SERVER = 'smtp.googlemail.com'
-MAIL_PORT = 465
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-MAIL_USERNAME = 'lungvison'
-MAIL_PASSWORD = 'qweasdzxc@123'
-
-ADMINS = ['lungvison@gmail.com']
 
 
 

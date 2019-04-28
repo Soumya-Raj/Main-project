@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
 
 
-from . import db,mail
+from . import db
 from .models import Image,add_image,Feedback
 
 main = Blueprint('main',__name__)
@@ -155,9 +155,3 @@ def uploadit():
         return redirect(url_for('main.uploadit',
                                 filename=filename))
     return render_template('upload.html')
-
-@main.route('/uploads/<filename>')
-def uploaded_file(filename):
-
-    return send_from_directory(UPLOAD_FOLDER,
-                               filename)

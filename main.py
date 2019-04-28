@@ -8,6 +8,8 @@ from flask_login import LoginManager,login_required, current_user
 
 from . import db
 from .models import Image,add_image,Feedback
+from .tester import segment_function
+from .new import function
 
 main = Blueprint('main',__name__)
 
@@ -99,7 +101,7 @@ def index():
 
 @main.route('/chatbot')
 def chatbot():
-    return render_template('chatbot.html')
+    return render_template('select.html')
 
 @main.route('/process_email', methods=['POST'])
 def process_email():
@@ -136,6 +138,7 @@ def uploadit():
 
         uploaded_files = request.files.getlist("file[]")
         filenames = []
+        UPLOAD_FOLDER='/home/rakshith/webinterface/static/img/Segmentation/'
         for file in uploaded_files:
         # if user does not select file, browser also
         # submit an empty part without filename
@@ -150,8 +153,21 @@ def uploadit():
                             'img_data' : file.read(),
                             })
 
-                # file.save(os.path.join(UPLOAD_FOLDER, filename))
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
                 filenames.append(filename)
         return redirect(url_for('main.uploadit',
                                 filename=filename))
     return render_template('upload.html')
+
+
+@main.route('/segment',methods=['POST','GET'])
+
+
+def segment():
+
+    luna_subset_path = '/home/rakshith/webinterface/static/img/Segmentation/'
+    result_path = '/home/rakshith/webinterface/static/img/img_results/'
+    img_file = '/home/rakshith/webinterface/static/img/Segmentation/1.3.6.1.4.1.14519.5.2.1.6279.6001.244681063194071446501270815660.mhd'
+    seg_model_loadPath = '/home/rakshith/'
+
+    segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath)

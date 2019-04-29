@@ -1,4 +1,3 @@
-
 import torch
 import cv2
 import numpy as np
@@ -41,6 +40,7 @@ def segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath):
     N = int(img_tensor.shape[0]/5)
 
     print("Its running")
+    img_fname=[]
     for sliceNum in range(N,img_tensor.shape[0]-N):
         img_slice = img_tensor[sliceNum]
         mid_mean = img_slice[:,100:400,100:400].mean()
@@ -78,6 +78,7 @@ def segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath):
                 plt.imshow(out_mask,cmap='gray')
                 plt.title('Detected largest nodule')
                 plt.savefig(result_path+'slice_'+str(sliceNum+1)+'.png')
+                img_fname.append('slice_'+str(sliceNum+1)+'.png')
                 plt.close()
 
-    return "Done"
+    return img_fname

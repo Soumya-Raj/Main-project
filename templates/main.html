@@ -19,8 +19,8 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="static/css/style.css">
 	<link rel="stylesheet" href="static/css/responsive.css">
-  <!-- <link rel="stylesheet" href="static/css/chatbot/app.css"> -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/app.css') }}">
+
 
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
@@ -59,7 +59,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
+
+
 					<!-- Collect the nav links, forms, and other content for toggling -->
+
+
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<div class="row ml-0 w-100">
 							<div class="col-lg-12 pr-0">
@@ -92,11 +96,9 @@
 									</li>
 
                   {% endif %}
+
 									<li class="nav-item ">
-										<a class="nav-link" href="{{ url_for('main.select') }}">Chatbot</a>
-									</li>
-									<li class="nav-item ">
-										<a class="nav-link" href="/home/rakshith/webinterface/templates/contact.html">Contact</a>
+										<a class="nav-link" href="#contact">Contact</a>
 									</li>
 
 							</div>
@@ -107,6 +109,7 @@
 		</div>
 	</header>
 	<!--================Header Menu Area =================-->
+
 
 	<!--================ Home Banner Area =================-->
 	<section class="home_banner_area">
@@ -121,9 +124,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 
 	</section>
 
@@ -171,7 +171,7 @@
 							<h4>Receive results</h4>
 						</a>
 						<p>
-							LungCare provides you with trusted analysis of your lungs within 30 seconds of upload.
+							LungCare provides you with trusted analysis of your lungs.
 						</p>
 					</div>
 				</div>
@@ -179,10 +179,10 @@
 					<div class="single_service">
 						<span class="lnr lnr-users"></span>
 						<a href="#">
-							<h4>Schedule your next check</h4>
+							<h4>Store your files safely</h4>
 						</a>
 						<p>
-							Store your photos securely and set up reminders for your next checks. Stay on top of your health with regular checks.
+							Store your files securely.Stay on top of your health with regular checks.
 						</p>
 					</div>
 				</div>
@@ -352,12 +352,7 @@
                   {% with nam0 = get_flashed_messages(category_filter=["name0"]) %}
                   {% if nam0 %}
 
-
-
-
                   <h4 class="">{{nam0[0]}}</h4>
-
-
 
                   {% endif %}
                   {% endwith %}
@@ -398,12 +393,7 @@
                   {% with nam1 = get_flashed_messages(category_filter=["name1"]) %}
                   {% if nam1 %}
 
-
-
-
                   <h4 class="">{{nam1[0]}}</h4>
-
-
 
                   {% endif %}
                   {% endwith %}
@@ -441,12 +431,7 @@
                   {% with nam2 = get_flashed_messages(category_filter=["name2"]) %}
                   {% if nam2 %}
 
-
-
-
                   <h4 class="">{{nam2[0]}}</h4>
-
-
 
                   {% endif %}
                   {% endwith %}
@@ -484,12 +469,7 @@
                   {% with nam3 = get_flashed_messages(category_filter=["name3"]) %}
                   {% if nam3 %}
 
-
-
-
                   <h4 class="">{{nam3[0]}}</h4>
-
-
 
                   {% endif %}
                   {% endwith %}
@@ -505,9 +485,7 @@
                 {% if msg3 %}
                 <p class="">
 
-
                 {{msg3[0]}}
-
 
                 </p>
                 {% endif %}
@@ -523,7 +501,7 @@
 
 
 
-	<!--================ Start Appointment Area =================-->
+	<!--================ Start Feedback submission Area =================-->
 	<section class="appointment-area">
 		<div class="container">
 			<div class="row justify-content-between align-items-center appointment-wrap">
@@ -551,7 +529,7 @@
 			</div>
 		</div>
 	</section>
-	<!--================ End Appointment Area =================-->
+	<!--================ End feedback submission Area =================-->
 
 	<!--================ start footer Area =================-->
 	<footer class="footer-area section_gap">
@@ -562,7 +540,7 @@
 
 					</div>
 				</div>
-				<div class="col-lg-4  col-md-6">
+				<div class="col-lg-4  col-md-6" id="contact">
 					<div class="single-footer-widget mail-chimp">
 						<h6 class="mb-20">Contact Us</h6>
 						<p>

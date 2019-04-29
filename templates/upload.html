@@ -32,6 +32,8 @@
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="q35o4p01rr1byor"></script>
 <script src="https://www.google.com/jsapi?key=AIzaSyDTpfIEYydGLzzhKRrm41LaqFssZLiqsjU"></script>
 <script src="https://apis.google.com/js/client.js?onload=initPicker"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
 
 <style>
 .btn {
@@ -108,7 +110,7 @@ display: inline-block;
 
               <ul class="nav navbar-nav center_nav pull-right">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home</a>
+                  <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
                 </li>
                 {% if not current_user.is_authenticated %}
                 <li class="nav-item">
@@ -123,9 +125,7 @@ display: inline-block;
                 </li>
 
                 {% endif %}
-                <li class="nav-item ">
-                  <a class="nav-link" href="#">About</a>
-                </li>
+
                 <li class="nav-item ">
                   <a class="nav-link" href="#contact">Contact</a>
                 </li>
@@ -160,7 +160,7 @@ display: inline-block;
                 <span class="filename"></span>
                 <form method=post enctype=multipart/form-data>
                   <input type=file  name=file[] multiple="">
-                  <input class="main_btn text-uppercase" type=submit value=Upload>
+                  <input class="main_btn text-uppercase" type=submit value=Upload onclick="$('#loading').show();">
                 </form>
                   </div>
          </div>
@@ -169,35 +169,12 @@ display: inline-block;
 </div>
 
 
-               <!-- <div  id="drop-zone">
-
-              <span>
-
-              <i id="auth" class="fab fa-dropbox " onclick="Dropbox.choose(options)" style="color:rgb(0,0,0)" >Dropbox</i> </g>
-
-              </span>
-
-              <span>
-              <br/>
-              <br/>
-              <i id="pick" class="fab fa-google-drive " onclick="newPicker()" style="color:rgb(0,0,0)">Google Drive</i>
-
-              </span>
-
-
-
-              </form> -->
-              <progress id="total" name="total" max="100" value="0">
-
-</progress>
-              <div id='change'>
-
-           </div>
             </div>
-             <div class="card-action">
 
+               <div class="single_service">
+                <div id="loading" style="display:none;"><img src="static/img/fileload.gif" alt="" />Loading!</div>
+             </div>
 
-          </div>
         </div>
       </div>
      </div>
@@ -221,14 +198,17 @@ display: inline-block;
 					</div>
 				</div>
 				<div class="col-lg-4  col-md-6">
-					<div class="single-footer-widget mail-chimp">
-						<h6 class="mb-20">Contact Us</h6>
-						<p>
-							56/8, Santa bullevard, Rocky beach, San fransisco, Los angeles, USA
-						</p>
-						<h3>012-6532-568-9746</h3>
-						<h3>012-6532-568-97468</h3>
-					</div>
+          <div class="single-footer-widget mail-chimp">
+            <h6 class="mb-20">Contact Us</h6>
+            <p>
+              Deptartment of Computer Science</br>
+               Government Engineering College, Sreekrishnapuram </br>
+               Palakkad
+
+            </p>
+            <h3>+91-7356162825</h3>
+            <h3>+91-6282865639</h3>
+          </div>
 				</div>
 				<div class="col-lg-6  col-md-12">
 					<div class="single-footer-widget newsletter">
@@ -246,24 +226,6 @@ display: inline-block;
 			</div>
 		</div>
 	</footer>
-
-
-
-    <script>
-    //FOR UPDATING THE PROGRESS
-  $(document).ready(function(){
-    var socket = io.connect('http://127.0.0.1:5000');
-    socket.on('message',function(msg){
-      document.getElementById("change").innerHTML = "<i>"+msg+"%</i>";
-        $("#total").val(msg)
-        $("#js-upload-submit").removeAttr('disabled')
-        $("#js-upload-submit").css({
-          "cursor": "pointer",
-          "box-shadow": "1px 0px 6px #333"
-        });
-    });
-  });
-    </script>
 
 
 </body>

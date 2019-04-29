@@ -5,8 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
 from io import BytesIO
-
-
 from . import db
 from .models import Image,add_image,Feedback
 from .tester import segment_function
@@ -19,7 +17,11 @@ main = Blueprint('main',__name__)
 
 @main.route('/')
 def index():
-#-------------CODE FOR THE COUNTERS IN HOME PAGE----------
+
+
+    
+#-------------CODE FOR THE COUNTERS IN HOME PAGE----------------#
+
     sql_image='select count(img_filename) from Image'
     count_file = db.session.execute(sql_image)
 
@@ -105,6 +107,13 @@ def index():
 def select():
     return render_template('select.html')
 
+
+
+
+
+#--------------------CODE FOR FEEDBACK SECTION-------------------#
+
+
 @main.route('/process_email', methods=['POST'])
 def process_email():
 
@@ -125,6 +134,11 @@ def process_email():
 
 
     return redirect(url_for('main.index'))
+
+
+
+
+#--------------------------------ANALYSIS SECTION----------------------#
 
 @main.route('/startanalysis')
 @login_required
@@ -163,6 +177,10 @@ def uploadit():
     return render_template('upload.html')
 
 
+
+
+#-----------------CALLING INDEPTH ANALYSIS-------------------------#
+
 @main.route('/segment',methods=['POST','GET'])
 
 
@@ -176,9 +194,22 @@ def segment():
     img_file = '/home/rakshith/dataset/subset3/'+my_file
     seg_model_loadPath = '/home/rakshith/'
 
-    segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath)
+    img_fname=segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath)
+    if (len(img_fname)>0):
 
-    return render_template('result.html')
+        image1=img_fname[0]
+        image2=img_fname[1]
+        image3=img_fname[2]
+        image4=img_fname[3]
+        return render_template('result.html',file1=image1,file2=image2,file3=image3,file4=image4)
+    else:
+        return render_template('resultok.html')
+
+
+
+
+
+#-----------------------------CALLING QUICK ANALYSIS----------------------#
 
 
 @main.route('/quicksegment',methods=['POST','GET'])
@@ -194,37 +225,14 @@ def quicksegment():
     img_file = '/home/rakshith/dataset/subset3/'+my_file
     seg_model_loadPath = '/home/rakshith/'
 
-    quickAnalysis(luna_subset_path,result_path,img_file,seg_model_loadPath)
+    img_fname=quickAnalysis(luna_subset_path,result_path,img_file,seg_model_loadPath)
 
-    return render_template('result.html')
+    if (len(img_fname)>0):
 
-
-@main.route('/segment2',methods=['POST','GET'])
-
-def segment2():
-    my_file = session.get('my_file', None)
-
-    sql_image='select image_data from Image where image_name='+my_file
-
-    image_file = db.session.execute(sql_image)
-
-    d, f_data = {}, []
-
-    i=0
-    for rowproxy in count_file:
-
-        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
-        for column, value in rowproxy.items():
-            # build up the dictionary
-            d = {**d, **{column: value}}
-            f_data.append(d[column])
-
-    if(f_name):
-
-        file_data=f_data[0]
-
-
-
+        image1=img_fname[0]
+        image2=img_fname[1]
+        image3=img_fname[2]
+        image4=img_fname[3]
+        return render_template('result.html',file1=image1,file2=image2,file3=image3,file4=image4)
     else:
-        flash('ooombi')
-    return "sucessful"
+        return render_template('resultok.html')

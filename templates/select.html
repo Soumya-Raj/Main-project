@@ -21,6 +21,7 @@
  <link rel="stylesheet" href="static/css/responsive.css">
  <!-- <link rel="stylesheet" href="static/css/chatbot/app.css"> -->
  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/app.css') }}">
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
  <!--================Header Menu Area =================-->
  <header class="header_area">
@@ -77,7 +78,7 @@
 
                <ul class="nav navbar-nav center_nav pull-right">
                  <li class="nav-item active">
-                   <a class="nav-link" href="#">Home</a>
+                   <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
                  </li>
                  {% if not current_user.is_authenticated %}
                  <li class="nav-item">
@@ -92,11 +93,9 @@
                  </li>
 
                  {% endif %}
+
                  <li class="nav-item ">
-                   <a class="nav-link" href="https://assistant-chat-eu-gb.watsonplatform.net/web/public/5d075d42-23dc-48fe-bc33-ada79ee17ce8">Chatbot</a>
-                 </li>
-                 <li class="nav-item ">
-                   <a class="nav-link" href="/home/rakshith/webinterface/templates/contact.html">Contact</a>
+                   <a class="nav-link" href="#contact">Contact</a>
                  </li>
 
              </div>
@@ -115,7 +114,7 @@
    <div class="container">
      <div class="row justify-content-center section-title-wrap">
        <div class="col-lg-12">
-         <h1>LungCare Services : </h1>
+
          <p>
            Select the analysis you wish to perform.
          </p>
@@ -131,32 +130,35 @@
          				<div class="col-lg-3 col-md-6">
          					<div class="single_service">
          						<span class="lnr lnr-rocket"></span>
-         						<a href="{{ url_for('main.quicksegment') }}">
+         						<a href="{{ url_for('main.quicksegment') }}" onclick="$('#loading').show();">
          							<h4>Quick Analysis</h4>
          						</a>
          						<p>
-         							Here we would be considering only the most probable slice from your upload volume.
+         							Here we would be considering only the most probable slice from your upload volume. Approx time:5-6mins
          						</p>
          					</div>
          				</div>
          				<div class="col-lg-3 col-md-6">
          					<div class="single_service">
          						<span class="lnr lnr-heart-pulse"></span>
-         						<a href="{{ url_for('main.segment') }}">
+         						<a href="{{ url_for('main.segment') }}" onclick="$('#loading').show();">
          							<h4>In-Depth Analysis</h4>
          						</a>
          						<p>
-         							LungCare provides you with trusted analysis of your lungs by comparing all the slices in the uploaded volume.
+         							LungCare provides you with trusted analysis of your lungs by comparing all the slices in the uploaded volume.Approx time:30-40mins
          						</p>
          					</div>
          				</div>
          				<div class="col-lg-3 col-md-6">
          					<div class="single_service">
+                    <div id="loading" style="display:none;"><img src="static/img/loading.gif" alt="" />Loading!</div>
+                 </div>
+
 
          					</div>
          				</div>
          			</div>
-       </div>
+
 
  </section>
  <!--================ End Selection Area =================-->

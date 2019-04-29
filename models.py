@@ -3,9 +3,13 @@ from flask import redirect, url_for
 from flask_admin import AdminIndexView
 
 from flask_login import UserMixin,current_user,login_user,logout_user
-# from . import admin
+
 from flask_admin.contrib.sqla import ModelView
 
+
+
+
+#---------------------- USER CREDENTIALS--------------------------#
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
@@ -13,17 +17,30 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
+
+
+#----------------------ADMIN CREDENTIALS----------------------------#
+
 class Admindb(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     name = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
 
 
+
+
+#----------------------FEEDBACK TABLE-------------------------------#
+
 class Feedback(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     message = db.Column(db.String(1000))
+
+
+
+
+#-----------------------VIEWS FOR ADMINPAGE----------------------------#
 
 
 class MyAdminIndexView(AdminIndexView):
@@ -43,6 +60,11 @@ class MyModelView(ModelView):
 
     def inaccessible_callback(self,name,**kwargs):
         return redirect(url_for('auth.adminlogin'))
+
+
+
+#----------------------------FILE STORAGE-------------------------------#
+
 
 class Image(db.Model):
 

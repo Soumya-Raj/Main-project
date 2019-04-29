@@ -26,6 +26,7 @@ def get_filename(case):
 
 
 def quickAnalysis(luna_subset_path,result_path,img_file,seg_model_loadPath):
+    img_fname=[]
     itk_img = sitk.ReadImage(img_file)
     img_tensor = torch.from_numpy(sitk.GetArrayFromImage(itk_img)).unsqueeze(1).float()
 
@@ -69,4 +70,6 @@ def quickAnalysis(luna_subset_path,result_path,img_file,seg_model_loadPath):
                 plt.imshow(out_mask,cmap='gray')
                 plt.title('Detected largest nodule')
                 plt.savefig(result_path+'slice_'+str(sliceNum+1)+'.png')
+                img_fname.append('slice_'+str(sliceNum+1)+'.png')
                 plt.close()
+    return img_fname

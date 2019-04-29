@@ -7,6 +7,8 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
+#---------------------------- ADMIN SECTION----------------------------#
+
 @auth.route('/adminlogin')
 def adminlogin():
     return render_template('admin_login.html')
@@ -30,6 +32,13 @@ def adminlogin_post():
     name=current_user.name
     flash(name)
     return redirect(url_for('main.index'))
+
+
+
+
+#-------------------------------USER SECTION-----------------------------#
+
+
 
 @auth.route('/login')
 def login():

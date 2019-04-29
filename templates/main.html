@@ -93,7 +93,7 @@
 
                   {% endif %}
 									<li class="nav-item ">
-										<a class="nav-link" href="{{ url_for('main.chatbot') }}">Chatbot</a>
+										<a class="nav-link" href="{{ url_for('main.select') }}">Chatbot</a>
 									</li>
 									<li class="nav-item ">
 										<a class="nav-link" href="/home/rakshith/webinterface/templates/contact.html">Contact</a>
@@ -298,11 +298,12 @@
 <div class="chat">
 <button class="open-button" onclick="openForm()">Chat!</button>
 <div class="chat-popup" id="myForm">
+  <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/21fbd612-0632-4edd-820f-3609b3d7cf22"></iframe>
 
   <button type="button" onclick="closeForm()" class="close" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
-<iframe height="430" width="350" src="https://bot.dialogflow.com/21fbd612-0632-4edd-820f-3609b3d7cf22"></iframe>
+
 </div>
 </div>
  </form>

@@ -1,15 +1,17 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory,Blueprint,flash,send_file
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory,Blueprint,flash,send_file,session
 from werkzeug import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_required, current_user
+from io import BytesIO
 
 
 from . import db
 from .models import Image,add_image,Feedback
 from .tester import segment_function
-from .new import function
+from .quick import quickAnalysis
+
 
 main = Blueprint('main',__name__)
 
@@ -99,8 +101,8 @@ def index():
 
     return render_template('main.html')
 
-@main.route('/chatbot')
-def chatbot():
+@main.route('/select')
+def select():
     return render_template('select.html')
 
 @main.route('/process_email', methods=['POST'])
@@ -138,7 +140,7 @@ def uploadit():
 
         uploaded_files = request.files.getlist("file[]")
         filenames = []
-        UPLOAD_FOLDER='/home/rakshith/webinterface/static/img/Segmentation/'
+        UPLOAD_FOLDER='/home/rakshith/webinterface/static/img/seg/'
         for file in uploaded_files:
         # if user does not select file, browser also
         # submit an empty part without filename
@@ -155,7 +157,8 @@ def uploadit():
 
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
                 filenames.append(filename)
-        return redirect(url_for('main.uploadit',
+                session['my_file'] = filename
+        return redirect(url_for('main.select',
                                 filename=filename))
     return render_template('upload.html')
 
@@ -165,9 +168,63 @@ def uploadit():
 
 def segment():
 
-    luna_subset_path = '/home/rakshith/webinterface/static/img/Segmentation/'
+    my_file = session.get('my_file', None)
+
+
+    luna_subset_path = '/home/rakshith/webinterface/static/img/seg/'
     result_path = '/home/rakshith/webinterface/static/img/img_results/'
-    img_file = '/home/rakshith/webinterface/static/img/Segmentation/1.3.6.1.4.1.14519.5.2.1.6279.6001.244681063194071446501270815660.mhd'
+    img_file = '/home/rakshith/dataset/subset3/'+my_file
     seg_model_loadPath = '/home/rakshith/'
 
     segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath)
+
+    return render_template('result.html')
+
+
+@main.route('/quicksegment',methods=['POST','GET'])
+
+
+def quicksegment():
+
+    my_file = session.get('my_file', None)
+
+
+    luna_subset_path = '/home/rakshith/webinterface/static/img/seg/'
+    result_path = '/home/rakshith/webinterface/static/img/img_results/'
+    img_file = '/home/rakshith/dataset/subset3/'+my_file
+    seg_model_loadPath = '/home/rakshith/'
+
+    quickAnalysis(luna_subset_path,result_path,img_file,seg_model_loadPath)
+
+    return render_template('result.html')
+
+
+@main.route('/segment2',methods=['POST','GET'])
+
+def segment2():
+    my_file = session.get('my_file', None)
+
+    sql_image='select image_data from Image where image_name='+my_file
+
+    image_file = db.session.execute(sql_image)
+
+    d, f_data = {}, []
+
+    i=0
+    for rowproxy in count_file:
+
+        # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
+        for column, value in rowproxy.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+            f_data.append(d[column])
+
+    if(f_name):
+
+        file_data=f_data[0]
+
+
+
+    else:
+        flash('ooombi')
+    return "sucessful"

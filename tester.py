@@ -57,7 +57,7 @@ def segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath):
         output = cv2.connectedComponentsWithStats(thresh, connectivity, cv2.CV_32S)
         stats = output[2]
         temp = stats[1:, cv2.CC_STAT_AREA]
-        print("entering a loop bro")
+        print("entering a loop")
         if len(temp)>0:
             largest_label = 1 + np.argmax(temp)
             areas = stats[1:, cv2.CC_STAT_AREA]
@@ -79,3 +79,5 @@ def segment_function(luna_subset_path,result_path,img_file,seg_model_loadPath):
                 plt.title('Detected largest nodule')
                 plt.savefig(result_path+'slice_'+str(sliceNum+1)+'.png')
                 plt.close()
+
+    return "Done"
